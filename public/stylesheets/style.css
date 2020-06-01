@@ -1,3 +1,13 @@
 .wrapper{
     height:90vh;
 }
+#delete{
+    display:inline;
+}
+#author{
+    /* display:inline; */
+    text-align: right;
+}
+#content{
+    text-align: right;
+}

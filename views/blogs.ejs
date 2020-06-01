@@ -1,11 +1,35 @@
 <%- include("partials/header")%>
-<h1>INDEX PAGE</h1>
-<% blogs.forEach((blog) => {%> 
-    <div>
-        <h2><%= blog.title %> </h2>
-        <img src="<%= blog.image %> " alt="<%= blog.title %> image">
-        <span><%= blog.created %> </span>
-        <p><%= blog.body %> </p>
+<div class="ui main text container">
+    <div class="ui huge header">
+        Welcome to wordWrap
     </div>
-<% });%>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <% blogs.forEach((blog) => {%> 
+                <div class="item">
+                    
+                    <div class="image">
+                        <img src="<%= blog.image %> " alt="<%= blog.title %> image">
+                    </div>
+                    <div class="content">
+                        <a class="header" href="/blogs/<%= blog._id%>"><%= blog.title %> </a>
+                        <div class="meta">
+                            <span><%= blog.created.toDateString() %> </span>
+                        </div>
+                        <div class="desciption">
+                            <p><%= blog.body.substring(0,100) %>... </p>
+                        </div>
+                        <div class="extra">
+                            <a class="ui floated basic violet button small" href="/blogs/<%= blog._id%> ">Read More
+                                <i class="right chevron icon"></i>
+                            </a>
+                            <h4 id="author"><%= blog.author %> </h4>
+                        </div>
+                    </div>
+                </div>
+            <% });%>
+        </div>
+    </div>
+</div>
+
 <%- include("partials/footer") %>

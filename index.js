@@ -1,14 +1,18 @@
 var bodyParser = require('body-parser'),
-    mongoose = require('mongoose')
+    methodOverride = require('method-override'),
+    expressSanitizer = require('express-sanitizer'),
+    mongoose = require('mongoose'),
     express = require('express'),
     app = express();
 
 //APP config
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressSanitizer());
+app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 
-const database =  'mongodb+srv://areeb:5m3uR2CfNntiqbLb@test-icewh.mongodb.net/test?retryWrites=true&w=majority' || 'mongodb://localhost:27017/yelpcamp';
+const database =  'mongodb+srv://areeb:zNntxsYsd8yhmYev@test-icewh.mongodb.net/test?retryWrites=true&w=majority' || 'mongodb://localhost:27017/yelpcamp';
 mongoose.connect(database, { useNewUrlParser: true,useUnifiedTopology: true}, (err) => {
     if(err)
         console.log('Unable to connect to mongoDB servers');
@@ -21,6 +25,7 @@ var blogSchema = new mongoose.Schema({
     title: String,
     image: String,
     body: String,
+    author: String,
     created: {type: Date, default: Date.now}
 });
 var Blog = mongoose.model("Blog", blogSchema);
@@ -46,18 +51,16 @@ app.get("/blogs", (req, res) => {
     });
 });
 
+//NEW ROUTE
 app.get("/blogs/new", (req, res) => {
-    Blog.find({}, (err, blogs) => {
-        if(err){
-            console.log(err);
-        }else{
-            res.render("new", {blogs: blogs});
-        }
-    });
+   res.render("new");
 });
 
+//CREATE ROUTE
 app.post("/blogs", (req, res) => {
-    //create blog
+    // console.log(req.body);
+    req.body.blog.body = req.sanitize(req.body.blog.body);
+    // console.log(req.body);
     Blog.create(req.body.blog, (err, newBlog) => {
         if(err){
             console.log(err);
@@ -67,6 +70,59 @@ app.post("/blogs", (req, res) => {
         }
     });
 });
-app.listen(process.env.PORT || 3000, () => {
+
+app.get("/blogs/:id", (req, res) => {
+    Blog.findById(req.params.id, (err, foundBlog) => {
+        if(err){
+            console.log(err);
+            res.redirect("/blogs");
+        }else{
+            res.render("show", {blog: foundBlog});
+        }
+    });
+});
+
+app.get("/blogs/:id/edit", (req, res) => {
+    //create blog
+    Blog.findById(req.params.id, (err, foundBlog) => {
+        if(err){
+            console.log(err);
+            res.redirect("/blogs");
+        }else{
+            res.render("edit", {blog: foundBlog});
+        }
+    });
+});
+
+//UPDATE ROUTE
+app.put("/blogs/:id", (req, res) => {
+    req.body.blog.body = req.sanitize(req.body.blog.body);
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
+        if(err){
+            console.log(err);
+            res.redirect("/blogs");
+        }
+        else{
+            res.redirect("/blogs/:id");
+        }
+    });
+});
+
+//DELETE ROUTE
+app.delete("/blogs/:id", (req, res) => {
+    Blog.findByIdAndRemove(req.params.id, (err) => {
+        if(err){
+            console.log(err);
+            res.redirect("/blogs");
+        }
+        else{
+            res.redirect("/blogs");
+        }
+    });
+});
+
+
+
+app.listen(process.env.PORT || 4000, () => {
     console.log(`The wordWrap Server has started`);
 });
