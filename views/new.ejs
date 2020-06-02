@@ -1,25 +1,30 @@
 <%- include("partials/header")%>
-<div class="wrapper">
+<div class="">
 <div class="ui main text container segment">
     <div class="ui huge header"> 
         New Blog
     </div>
-    <form action="/blogs" method="POST" class="ui form">
+    <form action="/blogs" method="POST" class="ui form" enctype="multipart/form-data">
         <div class="field">
           <label>Title</label>
-          <input type="text" name="blog[title]" placeholder="Title">
+          <input type="text" name="title" placeholder="Title" required>
         </div>
+        <!-- <div class="field">
+          <label>Upload Image Link</label>
+          <input type="text" name="" placeholder="Image">
+        </div> -->
         <div class="field">
           <label>Upload Image</label>
-          <input type="text" name="blog[image]" placeholder="Image">
+          <input type="file" name="file" placeholder="Image" id="file" class="custom-file-input" required> 
+          <label for="file" class="custom-file-label">Choose File</label>
         </div>
         <div class="field">
           <label>Author</label>
-          <input type="text" name="blog[author]" placeholder="Author Name">
+          <input type="text" name="author" placeholder="Author Name" required>
         </div>
         <div class="field">
             <label>Any thing you would like to share</label>
-            <textarea type="text" name="blog[body]" placeholder="Blog goes here"></textarea>
+            <textarea type="text" name="body" placeholder="Blog goes here" required></textarea>
         </div>
         <button class="ui button" type="submit">Submit</button>
       </form>

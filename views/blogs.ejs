@@ -1,7 +1,27 @@
 <%- include("partials/header")%>
+<div class="ui message container">
+    <i class="close icon"></i>
+    <div class="header">
+        Welcome to wordwrap. 
+    </div>
+    <p>  Hey! Nice to see you here.<br/>
+        This is the first and basic release(v1).<br/>
+        You are free to post your thoughts/blogs here.<br/>
+        Basic features like user accounts/login, add, comment & delete will be added in the later updates.
+    </p>
+  </div>
+  <div class="ui blue message container">
+    <i class="close icon"></i>
+    <div class="header">
+        Dear user,
+    </div>
+    <p> Request you to take a moment, and write a blog, the developer will feel encouraged.<br>
+        Use the new tab above to create a blog or click<a href="/blogs/new"><strong> here.</strong></a>
+    </p>
+  </div>
 <div class="ui main text container">
     <div class="ui huge header">
-        Welcome to wordWrap
+        wraps
     </div>
     <div class="ui top attached segment">
         <div class="ui divided items">
@@ -9,7 +29,7 @@
                 <div class="item">
                     
                     <div class="image">
-                        <img src="<%= blog.image %> " alt="<%= blog.title %> image">
+                        <img src="/image/<%= blog.image %> " alt="<%= blog.title %> image" >
                     </div>
                     <div class="content">
                         <a class="header" href="/blogs/<%= blog._id%>"><%= blog.title %> </a>
@@ -31,5 +51,4 @@
         </div>
     </div>
 </div>
-
 <%- include("partials/footer") %>
