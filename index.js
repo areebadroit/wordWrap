@@ -142,6 +142,7 @@ app.post("/blogs", upload.single('file'), (req, res) => {
             console.log(err);
         }
         else{
+            console.log(newBlog);
             console.log(req.file);
             res.redirect("/blogs");
         }
