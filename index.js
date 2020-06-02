@@ -136,7 +136,7 @@ app.post("/blogs", upload.single('file'), (req, res) => {
     var author = req.sanitize(req.body.author);
     var body = req.sanitize(req.body.body);
     var imageName = req.file.filename;
-    var newBlog = {title: title, image: imageName, body: body, author: author, created: {type: Date, default: Date.now}};
+    var newBlog = {title: title, image: imageName, body: body, author: author};
     Blog.create(newBlog, (err, newBlog) => {
         if(err){
             console.log(err);
