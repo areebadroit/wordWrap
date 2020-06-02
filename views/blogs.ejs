@@ -1,5 +1,5 @@
 <%- include("partials/header")%>
-<div class="ui message container">
+<!-- <div class="ui message container">
     <i class="close icon"></i>
     <div class="header">
         Welcome to wordwrap. 
@@ -18,14 +18,39 @@
     <p> Request you to take a moment, and write a blog, the developer will feel encouraged.<br>
         Use the new tab above to create a blog or click<a href="/blogs/new"><strong> here.</strong></a>
     </p>
-  </div>
+  </div> -->
 <div class="ui main text container">
     <div class="ui huge header">
         wraps
     </div>
     <div class="ui top attached segment">
         <div class="ui divided items">
+                <div class="item">  
+                    <div class="image">
+                        <img src="/image/<%= admin.image %> " alt="<%= admin.title %> image" >
+                    </div>
+                    <div class="content">
+                        <a class="header" href="/blogs/<%= admin._id%>"><%= admin.title %> </a>
+                        <div class="meta">
+                            <span><%= admin.created.toDateString() %> </span>
+                        </div>
+                        <div class="desciption">
+                            <p><%= admin.body %>... </p>
+                        </div>
+                        <div class="extra">
+                            <a class="ui floated basic violet button small" href="/blogs/<%= admin._id%> ">Read More
+                                <i class="right chevron icon"></i>
+                            </a>
+                            <h4 id="author"><%= admin.author %> </h4>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
             <% blogs.forEach((blog) => {%> 
+                <% if(blog._id!="5ed6c72ddaf60f1998bced22"){%> 
                 <div class="item">
                     
                     <div class="image">
@@ -47,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+                <% }%>
             <% });%>
         </div>
     </div>

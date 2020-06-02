@@ -75,11 +75,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/blogs", (req, res) => {
-    Blog.find({}, (err, blogs) => {
+    var areeb;
+    Blog.findById("5ed6c72ddaf60f1998bced22", (err, foundBlog) => {
+        areeb=foundBlog;
+    });
+    Blog.find({},null, {sort:{_id: -1}}, (err, blogs) => {
         if(err){
             console.log(err);
         }else{
-            res.render("blogs", {blogs: blogs});
+            res.render("blogs", {blogs: blogs, admin: areeb});
         }
     });
 });
