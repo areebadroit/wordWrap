@@ -9,7 +9,8 @@ var bodyParser = require('body-parser'),
 var router = express.Router();
 
 var Blog = require('../models/blog'),
-BlogComment = require('../models/comment');
+BlogComment = require('../models/comment'),
+BlogUser = require('../models/user');
 
 var middleware = require('../middleware');//index.js file contents will be taken automatically
 
@@ -50,6 +51,24 @@ var storage = new GridFsStorage({
             console.log(err);
         }else{
             res.render("profile", {blogs: allBlogs, currentUser: req.user});
+        }
+    });
+});
+
+router.get("/profile/:id", middleware.isLoggedIn, (req, res) => {
+    // console.log(req.user._id);
+    // console.log(req.params.id);
+    BlogUser.findById(req.params.id, (err,reqUser) => {
+        if(err){
+            console.log(err);
+        }else{
+            Blog.find({}, (err,allBlogs) => {
+                if(err){
+                    console.log(err);
+                }else{
+                    res.render("profilefrnd", {blogs: allBlogs, requestedUser: reqUser});
+                }
+            });
         }
     });
 });

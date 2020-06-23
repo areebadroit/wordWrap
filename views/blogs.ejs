@@ -18,7 +18,7 @@
                 
             <div class="card ">
                 <div class="card-header">
-                    <%= blog.author.username %>
+                    <a href="/profile/<%= blog.author.id %>"><%= blog.author.username %></a>
                 </div>
                 <a href="/blogs/<%=blog._id%>">
                 <div class="card-body">

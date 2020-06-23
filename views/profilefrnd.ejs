@@ -1,0 +1,44 @@
+<%- include("partials/header")%>
+<div class="container">
+        <header class="jumbotron">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="/image/<%= requestedUser.pp %>" alt="..." class="img-thumbnail">
+                </div>
+                <div class="col-md-9">
+                    <p>
+                    <h4><%= requestedUser.name %></h4>
+                    <label><%= requestedUser.username %></label><br/>
+                    <label><%= requestedUser.dob.toDateString() %></label><br/>
+                    <label><%= requestedUser.contact%></label><br/>
+                    <label><%= requestedUser.email%></label><br/>
+                </p>
+        </div>
+        </div>
+        </header>
+        <h4 id="myposts">Posts</h4>
+        </div>
+        <div class="row justify-content-center" style="display: flex; flex-wrap: wrap;">
+            <% blogs.forEach( (blog) => {%>
+                <% if(blog.author.id.equals(requestedUser._id)) {%> 
+                <div class="col-12 col-md-6">
+                <div class="card ">
+                    <div class="card-header">
+                        <%= blog.author.username %>
+                    </div>
+                    <div class="card-body">
+                        <div class="">
+                            <img class="img-fluid blog-img img-thumbnail " src="/image/<%= blog.image %>">
+                        </div>
+                      <blockquote class="blockquote mb-0">
+                        <p><%=blog.title%></p>
+                        <footer class="blockquote-footer"><%=blog.body.substring(0,90)%><cite title="Source Title"></cite></footer>
+                        <a href="/blogs/<%=blog._id%>" class="btn " style="display: inline;">read more</a>
+                      </blockquote>
+                    </div>
+                  </div>
+                </div>
+                <%}%>
+            <%});%>
+        </div>
+        
