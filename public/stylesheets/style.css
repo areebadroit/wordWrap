@@ -14,6 +14,9 @@
 .card{
     margin-bottom:20px;
 }
-/* .blog-img{
+.blog-img{
     height:300px;
-} */
+}
+.nav-item{
+    font-size: 20px;
+}
