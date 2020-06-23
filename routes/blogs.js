@@ -109,7 +109,7 @@ router.get("/image/:filename",(req, res)=>{
             console.log(err);
         }
         //check image
-        if(file.contentType === 'image/jpeg' || file.contentType === 'image/jpg'){
+        if(file.contentType === 'image/jpeg' || file.contentType === 'image/jpg' || file.contentType === 'image/png'){
         var readstream = gfs.createReadStream(file.filename);
         readstream.pipe(res);
         }else{
