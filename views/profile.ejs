@@ -1,0 +1,50 @@
+<%- include("partials/header")%>
+<div class="container">
+    <% if(currentUser){%> 
+        <header class="jumbotron">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="/image/<%= currentUser.pp %>" alt="..." class="img-thumbnail">
+                </div>
+                <div class="col-md-9">
+                    <p>
+                    <h4><%= currentUser.name %></h4>
+                    <label><%= currentUser.username %></label><br/>
+                    <label><%= currentUser.dob.toDateString() %></label><br/>
+                    <label><%= currentUser.contact%></label><br/>
+                    <label><%= currentUser.email%></label><br/>
+                </p>
+            <a href="#!"class="btn btn-primary">Edit</a>
+        </div>
+        </div>
+        </header>
+        <% } %>
+        <div>
+        <h4 id="myposts">My Posts</h4>
+        </div>
+        <div style="text-align: right; margin-bottom:20px;">
+            <a href="/blogs/new"class="btn btn-secondary">Add new post</a>
+            </div>
+        <div class="row justify-content-center" style="display: flex; flex-wrap: wrap;">
+            <% blogs.forEach( (blog) => {%>
+                <% if(blog.author.id.equals(currentUser._id)) {%> 
+                <div class="col-12 col-md-6">
+                <div class="card ">
+                    <div class="card-header">
+                        <%= blog.author.username %>
+                    </div>
+                    <div class="card-body">
+                        <div class="">
+                            <img class="img-fluid blog-img img-thumbnail " src="/image/<%= blog.image %>">
+                        </div>
+                      <blockquote class="blockquote mb-0">
+                        <p><%=blog.title%></p>
+                        <footer class="blockquote-footer"><%=blog.body.substring(0,90)%><cite title="Source Title"></cite></footer>
+                        <a href="/blogs/<%=blog._id%>" class="btn " style="display: inline;">read more</a>
+                      </blockquote>
+                    </div>
+                  </div>
+                </div>
+                <%}%>
+            <%});%>
+        </div>

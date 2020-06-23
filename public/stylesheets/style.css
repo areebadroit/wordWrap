@@ -14,3 +14,9 @@
 #show_image{
     height: 50vh;
 }
+.card{
+    margin-bottom:20px;
+}
+.blog-img{
+    height:300px;
+}

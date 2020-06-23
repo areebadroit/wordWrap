@@ -1,44 +1,67 @@
 <%- include("partials/header")%>
-<div class="ui floating red message container">
-    <div class="header">
-        Please note:
-    </div>
-    <p>All action buttons are disabled will be up soon.</p>
-  </div>
-<div class="ui main container segment">
-    <div class="ui huge header"><%= blog.title %> </div>
-    <div class="ui top attached">
-        <div class="item">
-            <img class="ui centered rounded image" src="/image/<%= blog.image %> " alt="<%= blog.title %> image" id="show_image">
-            <div class="ui main container segment">
-                <p><%= blog.body %> </p>
-            </div>
-            <!-- <div class="desciption">
-                <p>//<%= blog.body %> </p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">wordWrap</p>
+            <img class="img-fluid" src="/pictures/cover0.jpeg ">
+            <!-- <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
             </div> -->
-            <div class="content" id="content">
-                <h3><%= blog.author %> </h3>
-                <p><%= blog.created.toDateString() %> </p>
-            </div>   
-            <div class="ui disabled labeled button" tabindex="0">
-                <div class="ui red button">
-                  <i class="heart icon"></i> Like
+        </div>
+        <div class="col-md-9">
+            <div class="img-thumbnail card card-body">
+                <img class="img-fluid" src="/image/<%= blog.image %> ">
+            
+            <div class="caption">
+                <h4><a><%=blog.name%></a></h4>
+                <h5><a><%=blog.author.name%></a></h5>
+                <h6><%=blog.created.toDateString()%></h6>
+                <p><%=blog.body%></p>
+                <div>
+                    <% if(currentUser && blog.author.id.equals(currentUser._id)) { %> 
+                <a class="btn btn-warning btn-sm" href="/blogs/<%= blog._id %>/edit">Edit</a>
+                <form style="display: inline;"action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-danger btn-sm" >Delete</button>
+                </form>
+            <% } %> 
+            </div>
+            </div>
+        </div>
+        <br/>
+            <div class=" bg-light">
+            <h4>comments</h4>
+            <% blog.comments.forEach((comment) => { %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6><%= comment.author.username %></h6>
+                        <!-- <span style="text-align: right">n days ago</span> -->
+                    </div>
                 </div>
-                <a class="ui basic red left pointing label">
-                  0
-                </a>
-              </div>
-              <div class="ui disabled large vertical animated button" tabindex="0">
-                <div class="hidden content ">comment</div>
-                <div class="visible content">
-                  <i class="comment outline icon"></i>
-                </div>
-              </div>
-            <a href="/blogs/<%= blog._id %>/edit" class="ui disabled orange basic button">Edit</a>
-            <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST" class="ui form" id="delete">
-                <button class="ui disabled red basic button" type="submit">Delete</button>
+            <p><%= comment.text %> </p>
+            <% if(currentUser && comment.author.id.equals(currentUser._id)) { %> 
+            <a class="btn btn-warning btn-sm" 
+            href="/blogs/<%= blog._id %>/comments/<%= comment._id %>/edit">Edit</a>
+            <form action="/blogs/<%=blog._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST" class="form-inline" style="display: inline;">
+                    <input type="submit" class="btn btn-danger btn-sm" value="Delete">
             </form>
+            <% } %>
+            <% }); %>
+            <form action="/blogs/<%=blog._id%>/comments/new" method="POST" class="form-inline">
+                <div class="form-group mb-2">
+                    <input class="form-control" type="text" name="text" placeholder="write your comment here" style="width:50vw; margin-right:5px;">
+                </div>
+                <!-- <div class="form-group mx-sm-3 mb-2">
+                    <input class="form-control" type="text" name="author" placeholder="author">
+                </div> -->
+                <div class="form-group">
+                    <button class="btn btn-secondary mb-2">Submit</button>
+                </div>
+            </form>
+        </div>
         </div>
     </div>
 </div>
+
 <%- include("partials/footer") %>

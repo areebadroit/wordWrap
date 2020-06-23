@@ -1,33 +1,28 @@
 <%- include("partials/header")%>
-<div class="">
-<div class="ui main text container segment">
-    <div class="ui huge header"> 
-        New Blog
+<div class="container">
+    <h1 style="text-align: center; margin-top: 30px;">Write a Blog</h1>
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/blogs" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <input class="form-control" type="text" name="name" placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+                <!-- <label for="exampleFormControlFile1">Example file input</label> -->
+                <input type="file" class="form-control-file" name="file" id="file" required>
+              </div>
+            <!-- <div class="form-group">
+                <input type="file" name="file" id="file" class="form-control-file" required> 
+                <label for="file" class="custom-file-label">Choose File</label>
+            </div> -->
+            <div class="form-group">
+                <textarea class="form-control" type="text" name="description" placeholder="Enter description" required></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-secondary btn-block">Submit</button>
+            </div>
+        </form>
+        <a href="/blogs">Go back</a>
     </div>
-    <form action="/blogs" method="POST" class="ui form" enctype="multipart/form-data">
-        <div class="field">
-          <label>Title</label>
-          <input type="text" name="title" placeholder="Title" required>
-        </div>
-        <!-- <div class="field">
-          <label>Upload Image Link</label>
-          <input type="text" name="" placeholder="Image">
-        </div> -->
-        <div class="field">
-          <label>Upload Image</label>
-          <input type="file" name="file" placeholder="Image" id="file" class="custom-file-input" required> 
-          <label for="file" class="custom-file-label">Choose File</label>
-        </div>
-        <div class="field">
-          <label>Author</label>
-          <input type="text" name="author" placeholder="Author Name" required>
-        </div>
-        <div class="field">
-            <label>Any thing you would like to share</label>
-            <textarea type="text" name="body" placeholder="Blog goes here" required></textarea>
-        </div>
-        <button class="ui button" type="submit">Submit</button>
-      </form>
-</div>
-</div>
-<%- include("partials/footer") %>
+  </div>
+  </body>
+</html>

@@ -1,80 +1,39 @@
 <%- include("partials/header")%>
-<!-- <div class="ui message container">
-    <i class="close icon"></i>
-    <div class="header">
-        Welcome to wordwrap. 
-    </div>
-    <p>  Hey! Nice to see you here.<br/>
-        This is the first and basic release(v1).<br/>
-        You are free to post your thoughts/blogs here.<br/>
-        Basic features like user accounts/login, add, comment & delete will be added in the later updates.
-    </p>
-  </div>
-  <div class="ui blue message container">
-    <i class="close icon"></i>
-    <div class="header">
-        Dear user,
-    </div>
-    <p> Request you to take a moment, and write a blog, the developer will feel encouraged.<br>
-        Use the new tab above to create a blog or click<a href="/blogs/new"><strong> here.</strong></a>
-    </p>
-  </div> -->
-<div class="ui main text container">
-    <div class="ui huge header">
-        wraps
-    </div>
-    <div class="ui top attached segment">
-        <div class="ui divided items">
-                <div class="item">  
-                    <div class="image">
-                        <img src="/image/<%= admin.image %> " alt="<%= admin.title %> image" >
-                    </div>
-                    <div class="content">
-                        <a class="header" href="/blogs/<%= admin._id%>"><%= admin.title %> </a>
-                        <div class="meta">
-                            <span><%= admin.created.toDateString() %> </span>
-                        </div>
-                        <div class="desciption">
-                            <p><%= admin.body %>... </p>
-                        </div>
-                        <div class="extra">
-                            <a class="ui floated basic violet button small" href="/blogs/<%= admin._id%> ">Read More
-                                <i class="right chevron icon"></i>
-                            </a>
-                            <h4 id="author"><%= admin.author %> </h4>
-                        </div>
-                    </div>
-                </div>
+<div class="container">
+    <% if(currentUser){%> 
+        <div style="text-align: right">
+            <a href="/blogs/new"class="btn btn-secondary">Add new post</a>
+        </div>
+        <% } %>
+        <div>
+         
+    <div class="row">
+        <div class="col-lg-12">
+            <h3></h3>
         </div>
     </div>
-    <div class="ui top attached segment">
-        <div class="ui divided items">
-            <% blogs.forEach((blog) => {%> 
-                <% if(blog._id!="5ed6c72ddaf60f1998bced22"){%> 
-                <div class="item">
-                    
-                    <div class="image">
-                        <img src="/image/<%= blog.image %> " alt="<%= blog.title %> image" >
-                    </div>
-                    <div class="content">
-                        <a class="header" href="/blogs/<%= blog._id%>"><%= blog.title %> </a>
-                        <div class="meta">
-                            <span><%= blog.created.toDateString() %> </span>
-                        </div>
-                        <div class="desciption">
-                            <p><%= blog.body.substring(0,100) %>... </p>
-                        </div>
-                        <div class="extra">
-                            <a class="ui floated basic violet button small" href="/blogs/<%= blog._id%> ">Read More
-                                <i class="right chevron icon"></i>
-                            </a>
-                            <h4 id="author"><%= blog.author %> </h4>
-                        </div>
-                    </div>
+    <div class="row justify-content-center" style="display: flex; flex-wrap: wrap;">
+        <% blogs.forEach( (blog) => {%>
+            <div class="col-12 col-md-7">
+                
+            <div class="card ">
+                <div class="card-header">
+                    <%= blog.author.username %>
                 </div>
-                <% }%>
-            <% });%>
-        </div>
+                <a href="/blogs/<%=blog._id%>">
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <img class="img-fluid blog-img img-thumbnail" src="/image/<%= blog.image %>">
+                    </div></a>
+                  <blockquote class="blockquote mb-0">
+                    <p><%=blog.title%></p>
+                    <footer class="blockquote-footer"><%=blog.body.substring(0,90)%><cite title="Source Title"></cite></footer>
+                    <a href="/blogs/<%=blog._id%>" class="btn " style="display: inline;">read more</a>
+                  </blockquote>
+                </div>
+            
+              </div>
+            </div>
+        <%});%>
     </div>
 </div>
-<%- include("partials/footer") %>

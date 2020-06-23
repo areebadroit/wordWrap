@@ -1,0 +1,36 @@
+<%- include("partials/header")%>
+<div style="width: 30%; margin: 25px auto;">
+    <h1>Register</h1>
+<form action="/register" method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="username">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="name" required>
+  </div>
+  <div class="form-group">
+    <label for="username">Date of Birth</label>
+    <input type="date" class="form-control" id="dob" name="dob" placeholder="dob" required>
+  </div>
+  <div class="form-group">
+    <label for="username">Contact</label>
+    <input type="number" class="form-control" id="contact" name="contact" placeholder="contact" required>
+  </div>
+  <div class="form-group">
+    <label for="username">Email</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+  </div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name ="password" placeholder="password" required>
+      </div>
+      <div class="form-group">
+        <label for="profile picture">Profile picture</label>
+        <input type="file" class="form-control" id="profile picture" name ="file" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Register</button>
+</form>
+</div>
+
