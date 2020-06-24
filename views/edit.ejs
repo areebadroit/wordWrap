@@ -1,24 +1,19 @@
 <%- include("partials/header")%>
-<div class="wrapper">
-<div class="ui main text container segment">
-    <div class="ui huge header"> 
-        Edit <%= blog.title %>
-    </div>
-    <form action="/blogs/<%= blog._id %>?_method=PUT" method="POST" class="ui form">
-        <div class="field">
-          <label>Title</label>
-          <input type="text" name="blog[title]" value="<%= blog.title %>" >
+<div class="container">
+  <h1 style="text-align: center; margin-top: 30px;">Edit <%= blog.title %></h1>
+  <div style="width: 30%; margin: 25px auto;">
+    <form action="/blogs/<%= blog._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <input class="form-control" type="text" name="name" value="<%= blog.title %>" required>
+      </div>
+      <div class="form-group">
+          <input type="file" class="form-control-file" name="file" id="file" accept="image/*" required>
         </div>
-        <div class="field">
-          <label>Upload Image</label>
-          <input type="text" name="blog[image]" value="<%= blog.image %> " >
-        </div>
-        <div class="field">
-            <label>Any thing you would like to share</label>
-            <textarea type="text" name="blog[body]" ><%= blog.body %></textarea>
-        </div>
-        <button class="ui button" type="submit">Submit</button>
+        <div class="form-group">
+          <textarea class="form-control" type="text" name="description" placeholder="Enter description" required><%= blog.body %></textarea>
+      </div>
+      <div class="form-group">
+          <button class="btn btn-lg btn-secondary btn-block">Submit</button>
+      </div>
       </form>
 </div>
-</div>
-<%- include("partials/footer") %>

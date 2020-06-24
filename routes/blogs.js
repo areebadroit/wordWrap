@@ -170,10 +170,10 @@ router.get("/blogs/:id/edit", middleware.checkBlogOwnership,(req, res) => {
         });
 });
 
-router.put("/blogs/:id", middleware.checkBlogOwnership, (req, res) => {
+router.put("/blogs/:id", middleware.checkBlogOwnership, upload.single('file'), (req, res) => {
     //find campground with provided id and edit
     var name = req.body.name;
-    var image = req.body.image;
+    var image = req.file.filename;
     var description = req.body.description;
     var updateBlog = {title: name, image: image, body: description};
     Blog.findByIdAndUpdate(req.params.id, updateBlog, (err, foundBlog) => {
