@@ -48,7 +48,7 @@ var storage = new GridFsStorage({
             console.log(err);
         }
         //check image
-        if(file.contentType === 'image/jpeg' || file.contentType === 'image/jpg'){
+        if(file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/png'){
         var readstream = gfs.createReadStream(file.filename);
         readstream.pipe(res);
         }else{
